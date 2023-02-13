@@ -5,7 +5,7 @@ const Home = ({userAcount}) =>{
     return(
         <View>
             <Text>
-                Hola:{userAcount.user.username}
+                Hola:
             </Text>
         </View>
     )

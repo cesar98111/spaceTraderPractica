@@ -23,15 +23,18 @@ const KEY_STORAGE = "my-key"
 export default function App() {
 
   const [userAcount , setUserAcount] = useState(undefined)
+  const [userToken, setUserToken] = useState()
   
   useEffect(()=>{
     const renderGetUserAcount = async() =>{
       try{
         const data = await SecureStore.getItemAsync(KEY_STORAGE)
+        if(data){
+          console.log(data)
+          setUserAcount(await requestUserAcount(data))
+          console.log(userAcount)
+        }
         
-        console.log(data)
-        setUserAcount(await requestUserAcount(data))
-        console.log(userAcount)
         
       }catch(err){
         console.error(err)
@@ -45,23 +48,41 @@ export default function App() {
   const sendUserName = async(key, value)=>{
       try{
       
-        const data = await createUser(value)
-        const token = data.token
-        console.log(data)
-        await SecureStore.setItemAsync(key, token)
-        console.log(token)
-        setUserAcount(await requestUserAcount(token))
-        console.log(userAcount)
+          const data = await createUser(value)
+          console.log(data)
+        
+          const token = data.token
+          console.log(data)
+          await SecureStore.setItemAsync(key, token)
+          console.log(token)
+          setUserAcount(await requestUserAcount(token))
+          console.log(userAcount)
         
 
       }catch(err){
-        console.error(err)
+        console.error("papa")
       }
   }
 
   const send =(userName)=>{
     console.log(userName)
     sendUserName(KEY_STORAGE,userName)
+  }
+  const sendToken =(token) =>{
+    const sendUserToken = async () =>{
+      try{
+        const user = await requestUserAcount(token)
+        console.log(user)
+        if(user !== undefined){
+          await SecureStore.setItemAsync(KEY_STORAGE,token)
+          setUserAcount(user)
+        }
+      }catch(err){
+        console.log(err)
+      }
+    }
+
+    sendUserToken()
   }
   
   return (
@@ -72,7 +93,7 @@ export default function App() {
             (userAcount === undefined)||(userAcount === null)?
             <>
               <Drawer.Screen name="Login">
-                {()=><Login sendUser={send}/>}
+                {()=><Login sendUser={send} sendToken={sendToken}/>}
               </Drawer.Screen>
             </>
             :

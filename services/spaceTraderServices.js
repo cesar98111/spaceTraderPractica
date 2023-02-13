@@ -13,7 +13,8 @@ const createUser = async (userName) =>{
         .catch((err) => console.log(err))
         return data
     }catch(err){
-        console.log(err)
+        console.log("papa")
+        return null
     }
 }
 
@@ -25,7 +26,7 @@ const requestUserAcount = async (token) =>{
 
        return userAcount
     }catch(err){
-        console.log(err)
+        return null
     }
 }
 

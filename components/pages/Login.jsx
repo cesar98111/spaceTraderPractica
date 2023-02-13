@@ -5,7 +5,7 @@ import {useState} from 'react'
 
 
 
-const Login = ({sendUser}) =>{
+const Login = ({sendUser, sendToken}) =>{
 
     const [value, setValue] = useState('')
     const [login, setLogin] = useState(false)
@@ -23,7 +23,7 @@ const Login = ({sendUser}) =>{
     }
     
     const sendLogin = () =>{
-        sendUser(value)
+        sendToken(value)
         setLogin(false)
         setValue('')
     }
