@@ -1,5 +1,5 @@
 
-import {View, Text, StyleSheet, Pressable} from 'react-native'
+import {View, Text, StyleSheet, Pressable, TextInput} from 'react-native'
 import {useState} from 'react'
 
 
@@ -7,23 +7,71 @@ import {useState} from 'react'
 
 const Login = () =>{
 
+    const [login, setLogin] = useState(false)
+    const [register, setRegister] = useState(false)
 
 
     return(
-        <View style={styles.containerLogin}>
-            <Text style={styles.titleLogin}>BIENVENIDO A SPACETRADER</Text>
-            <View style={styles.buttonBox}>
-                <Pressable style={styles.loginButton}>
-                    <Text style={styles.textButton}>Login</Text>
-                </Pressable>
-                <Pressable style={styles.registerButton}>
-                    <Text style={styles.textButton}>
-                        Register
-                    </Text>
-                </Pressable>
+
+            <>
+            {
+            login === false
+            ?
+            null
+            :
+            <View style={styles.containerLogin}>
+                <Text style={styles.titleLogin}>PLEASE, INTRODUCE YOUR TOKEN</Text>
+                <View style={styles.buttonBox}>
+                    <TextInput style={styles}
+                    placeholder="add token"/>
+                    <Pressable style={styles.loginButton} onPress={() => setLogin(false)}>
+                        <Text style={styles.textButton}>
+                            Login
+                        </Text>
+                    </Pressable>
+                </View>
             </View>
+            }
+            {
+            register === false
+            ?
+            null
+            :
+            <View style={styles.containerLogin}>
+                <Text style={styles.titleLogin}>PLEASE, INTRODUCE YOUR USERNAME</Text>
+                <View style={styles.buttonBox}>
+                    <TextInput style={styles}
+                    placeholder="introduce userName"/>
+                    <Pressable style={styles.registerButton} onPress={() => setRegister(false)}>
+                        <Text style={styles.textButton}>
+                            Register
+                        </Text>
+                    </Pressable>
+                </View>
+            </View>
+            }
+            {
+                login || register 
+                ? null
+                : 
+                <View style={styles.containerLogin}>
+                    <Text style={styles.titleLogin}>BIENVENIDO A SPACETRADER</Text>
+                    <View style={styles.buttonBox}>
+                        <Pressable style={styles.loginButton} onPress={()=> setLogin(true)}>
+                            <Text style={styles.textButton}>Login</Text>
+                        </Pressable>
+                        <Pressable style={styles.registerButton} onPress={() => setRegister(true)}>
+                            <Text style={styles.textButton}>
+                                Register
+                            </Text>
+                        </Pressable>
+                    </View>
+                </View>
+
+            }
             
-        </View>
+        </>
+        
     )
 }
 
