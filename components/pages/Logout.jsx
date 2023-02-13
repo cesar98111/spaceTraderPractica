@@ -4,9 +4,11 @@ import { useEffect } from 'react'
 import * as SecureStore from 'expo-secure-store'
 
 
-
 const KEY_STORAGE = "my-key"
+
 const Logout = ({setUserAcount}) =>{
+    
+    
 
     useEffect(()=>{
         const deleteStorage = async() =>{
@@ -18,6 +20,7 @@ const Logout = ({setUserAcount}) =>{
             }
         }
     setTimeout(()=>{
+        console.log("paco")
         deleteStorage()
     },2000)
         
