@@ -18,8 +18,8 @@ export default function App() {
    <RootSiblingParent>
       <NavigationContainer>
         <Drawer.Navigator initialRouteName='Home'>
-          <Drawer.Screen name="home" element={Home}/>
-          <Drawer.Screen name="login" element={Login}/>
+          <Drawer.Screen name="home" component={Home}/>
+          <Drawer.Screen name="login" component={Login}/>
         </Drawer.Navigator>
       </NavigationContainer>
    </RootSiblingParent>
