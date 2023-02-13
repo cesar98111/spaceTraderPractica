@@ -1,11 +1,11 @@
 
 import {View, Text} from 'react-native'
 
-const Home = () =>{
+const Home = ({userAcount}) =>{
     return(
         <View>
             <Text>
-                HOME
+                Hola:{userAcount.user.username}
             </Text>
         </View>
     )

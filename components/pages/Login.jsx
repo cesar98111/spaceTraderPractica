@@ -5,12 +5,28 @@ import {useState} from 'react'
 
 
 
-const Login = () =>{
+const Login = ({sendUser}) =>{
 
+    const [value, setValue] = useState('')
     const [login, setLogin] = useState(false)
     const [register, setRegister] = useState(false)
 
+    const handlerValue = (data) =>{
+        setValue(data)
+        console.log(data)
+    }
 
+    const sendRegister = () =>{
+        sendUser(value)
+        setRegister(false)
+        setValue('')
+    }
+    
+    const sendLogin = () =>{
+        sendUser(value)
+        setLogin(false)
+        setValue('')
+    }
     return(
 
             <>
@@ -22,9 +38,12 @@ const Login = () =>{
             <View style={styles.containerLogin}>
                 <Text style={styles.titleLogin}>PLEASE, INTRODUCE YOUR TOKEN</Text>
                 <View style={styles.buttonBox}>
-                    <TextInput style={styles}
-                    placeholder="add token"/>
-                    <Pressable style={styles.loginButton} onPress={() => setLogin(false)}>
+                    <TextInput style={styles.inputLogin}
+                    placeholder="add token"
+                    onChangeText={handlerValue}
+                    value={value}
+                    />
+                    <Pressable style={styles.loginButton} onPress={() => sendLogin()}>
                         <Text style={styles.textButton}>
                             Login
                         </Text>
@@ -40,9 +59,11 @@ const Login = () =>{
             <View style={styles.containerLogin}>
                 <Text style={styles.titleLogin}>PLEASE, INTRODUCE YOUR USERNAME</Text>
                 <View style={styles.buttonBox}>
-                    <TextInput style={styles}
-                    placeholder="introduce userName"/>
-                    <Pressable style={styles.registerButton} onPress={() => setRegister(false)}>
+                    <TextInput style={styles.inputLogin}
+                    placeholder="introduce userName"
+                    onChangeText={handlerValue}
+                    value={value}/>
+                    <Pressable style={styles.registerButton} onPress={()=>sendRegister()}>
                         <Text style={styles.textButton}>
                             Register
                         </Text>

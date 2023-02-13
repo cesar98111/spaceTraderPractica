@@ -7,11 +7,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import {RootSiblingParent} from  'react-native-root-siblings'
 
 import * as SecureStore from 'expo-secure-store'
+import {createUser, requestUserAcount} from './services/spaceTraderServices';
 
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
 
 import Home from './components/pages/Home';
 import Login from './components/pages/Login';
+import Logout from './components/pages/Logout';
 
 const Drawer = createDrawerNavigator()
 
@@ -19,13 +22,45 @@ const KEY_STORAGE = "my-key"
 
 export default function App() {
 
-  const [userAcoutn , setUserAcoutn] = useState()
+  const [userAcount , setUserAcount] = useState(undefined)
+  
+  useEffect(()=>{
+    const renderGetUserAcount = async() =>{
+      try{
+        const data = await SecureStore.getItemAsync(KEY_STORAGE)
+        
+        console.log(data)
+        setUserAcount(await requestUserAcount(data))
+        console.log(userAcount)
+        
+      }catch(err){
+        console.error(err)
+      }
+      
+    }
 
+    renderGetUserAcount()
+    
+  },[])
   const sendUserName = async(key, value)=>{
+      try{
+      
+        const data = await createUser(value)
+        const token = data.token
+        console.log(data)
+        await SecureStore.setItemAsync(key, token)
+        console.log(token)
+        setUserAcount(await requestUserAcount(token))
+        console.log(userAcount)
+        
 
+      }catch(err){
+        console.error(err)
+      }
   }
 
   const send =(userName)=>{
+    console.log(userName)
     sendUserName(KEY_STORAGE,userName)
   }
   
@@ -34,17 +69,20 @@ export default function App() {
       <NavigationContainer>
         <Drawer.Navigator initialRouteName='Home'>
           {
-            (userAcoutn === null || userAcoutn === undefined)?
+            (userAcount === undefined)||(userAcount === null)?
             <>
-              <Drawer.Screen name="Home">
-                <Home/>
+              <Drawer.Screen name="Login">
+                {()=><Login sendUser={send}/>}
               </Drawer.Screen>
             </>
-            
             :
             <>
-              <Drawer.Screen name="login">
-                <Login sendUser={send}/>
+              
+              <Drawer.Screen name="Home">
+                {()=><Home userAcount={userAcount}/>}
+              </Drawer.Screen> 
+              <Drawer.Screen name='Logout'>
+                {()=><Logout setUserAcount={setUserAcount}/>}
               </Drawer.Screen>
             </>
           }
