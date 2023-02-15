@@ -15,6 +15,8 @@ import { useEffect, useState } from 'react';
 import Home from './components/pages/Home';
 import Login from './components/pages/Login';
 import Logout from './components/pages/Logout';
+import Loans from './components/pages/Loans';
+import Ships from './components/pages/Ships';
 
 const Drawer = createDrawerNavigator()
 
@@ -30,6 +32,7 @@ export default function App() {
     const renderGetUserAcount = async() =>{
       try{
         const data = await SecureStore.getItemAsync(KEY_STORAGE)
+        setUserToken(data)
         if(data){
           console.log(data)
           setUserAcount(await requestUserAcount(data))
@@ -63,8 +66,10 @@ export default function App() {
             <>
               
               <Drawer.Screen name="Home">
-                {()=><Home userAcount={userAcount}/>}
+                {()=><Home userAcount={userAcount} userToken={userToken}/>}
               </Drawer.Screen> 
+              <Drawer.Screen name="Loans" component={Loans}/>
+              <Drawer.Screen name="Ships" component={Ships}/>
               <Drawer.Screen name='Logout'>
                 {()=><Logout setUserAcount={setUserAcount}/>}
               </Drawer.Screen>
