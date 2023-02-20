@@ -42,10 +42,23 @@ const getShipsList = async (token) =>{
     }
 }
 
+const showLoans = async (token) =>{
+    try{
+        const data = await fetch(`${endPoints.createUser}/types/loans?token=${token}`)
+        const listLoans = await data.json()
+
+        return listLoans
+    }catch(err) {
+        console.log(err)
+        return null
+    }
+} 
+
 
 
 export {
     createUser,
     requestUserAcount,
-    getShipsList
+    getShipsList,
+    showLoans
 }
