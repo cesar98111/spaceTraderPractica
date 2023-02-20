@@ -1,13 +1,18 @@
-import { View, Text } from "react-native";
+import { useEffect, useState } from "react";
+import { View, Text, StyleSheet } from "react-native";
+import { getShipsList } from "../../services/spaceTraderServices";
 
-const Ships = () =>{
+const Ships = ({userToken}) =>{
+
+
     return(
         <View>
-            <Text>
-                SHIPS
-            </Text>
+
         </View>
     )
 }
+
+
+
 
 export default Ships

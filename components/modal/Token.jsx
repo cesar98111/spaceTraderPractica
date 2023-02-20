@@ -2,11 +2,9 @@ import { useEffect } from 'react'
 import {View, Text, Pressable, StyleSheet, Modal} from 'react-native'
 
 
-const Token = ({userToken, show}) =>{
+const Token = ({userToken, show, setShow}) =>{
 
-    useEffect(()=>{
-        console.log(userToken)
-    },[])
+    
     return(
         <Modal visible={show} transparent={true}>
             <View style={Styles.modalContainer}>
@@ -14,7 +12,7 @@ const Token = ({userToken, show}) =>{
                     <Text style={Styles.tokenText}>
                         your token:{userToken}
                     </Text>
-                    <Pressable style={Styles.confirmButton}>
+                    <Pressable style={Styles.confirmButton} onPress={()=> setShow(false)}>
                         <Text style={Styles.textButton}>
                             Acept
                         </Text>
@@ -22,8 +20,6 @@ const Token = ({userToken, show}) =>{
                 </View>
             </View> 
         </Modal>
-
-    
     )
 }
 

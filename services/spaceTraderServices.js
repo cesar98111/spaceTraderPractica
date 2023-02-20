@@ -22,7 +22,7 @@ const requestUserAcount = async (token) =>{
     try{
        const data = await fetch(`${endPoints.createUser}/my/account?token=${token}`)
        const userAcount = await data.json()
-       
+       console.log(userAcount)
        
        return userAcount
     }catch(err){
@@ -31,9 +31,21 @@ const requestUserAcount = async (token) =>{
     }
 }
 
+const getShipsList = async (token) =>{
+    try{
+        const data = await fetch(`${endPoints.createUser}/systems/OE/ship-listings?token=${token}`)
+        const shipsList = await data.json()
+        return shipsList
+    }catch(err){
+        console.log(err)
+        return null
+    }
+}
+
 
 
 export {
     createUser,
-    requestUserAcount
+    requestUserAcount,
+    getShipsList
 }

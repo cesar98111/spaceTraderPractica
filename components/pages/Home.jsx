@@ -1,8 +1,12 @@
 
+import { useState } from 'react'
 import {View, Text , StyleSheet ,Image, Pressable} from 'react-native'
 import Token from '../modal/Token'
 
 const Home = ({userAcount, userToken}) =>{
+
+    const [show, setShow] = useState(false)
+
     return(
         <View style={styles.containerProfile}>
             <View style={styles.headerProfile}>
@@ -10,23 +14,23 @@ const Home = ({userAcount, userToken}) =>{
                 <Text style={styles.textProfile}>
                     {userAcount.user.username}
                 </Text>
-                <Pressable style={styles.buttonToken}>
+                <Pressable style={styles.buttonToken} onPress={()=> setShow(true)}>
                     <Text style={styles.buttonText}>Token</Text>
                 </Pressable>
             </View>
             <View style={styles.creditProfile}>
-                <Text style={styles.textProfile}>creditos: {userAcount.user.credits}</Text>                
+                <Text style={styles.textProfile}>creditos: {userAcount.user.credits} </Text>                
             </View>
             <View style={styles.statusProfile}>
                 <View style={styles.properties}>
                     <Image source={require("../../assets/spaceShip.png")} style={styles.imageIcons}/>
-                    <Text style={styles.textProfile}>{userAcount.user.shipCount}</Text>
+                    <Text style={styles.textProfile}> {userAcount.user.shipCount}</Text>
                 </View>
                 <View style={styles.properties}>
                     <Image source={require("../../assets/structures.png")} style={styles.imageIcons}/>
-                    <Text style={styles.textProfile}>{userAcount.user.structureCount}</Text>
+                    <Text style={styles.textProfile}> {userAcount.user.structureCount}</Text>
                 </View>
-                
+                <Token userToken={userToken} show={show} setShow={setShow}/>
             </View>
             
         </View>
@@ -89,9 +93,10 @@ const styles = StyleSheet.create({
 
     },
     buttonToken:{
-        height:"10%",
+        height:"15%",
         width:"20%",
-        backgroundColor:"6AA0EE"
+        backgroundColor:"#6AA0EE",
+        borderRadius:10
     },
     buttonText:{
         color:"white",
