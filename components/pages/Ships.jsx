@@ -11,8 +11,8 @@ const Ships = ({userToken}) =>{
     useEffect(() =>{
         const getShips = async () =>{
             const list = await getShipsList(userToken)
-            setShipList(list.ShipListing)
-            console.log(shipList)
+            setShipList(list.shipListings)
+            console.log(list)
         }
         getShips()
     },[])
@@ -25,15 +25,19 @@ const Ships = ({userToken}) =>{
                 <Text>ACEDIENDO AL CATALOGO DE NAVES</Text>
                 :
                 <View>
-                    <FlatList
-                        data={shipList} renderItem={(List) =>{
+                    <Text>LISTA DE NAVES DISPONIBLES</Text>
+                    <FlatList data={shipList} renderItem={(List) =>{
+                            return(
+                                <InfoShips
+                                    key={List.item.type}
+                                    />
+                            )
                             
-                        }}
+                        }}  
                     />
-
                     
-                    <Text>HAY LISTA</Text>
                 </View>
+                
             }
         </View>
     )
