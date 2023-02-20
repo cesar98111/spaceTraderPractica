@@ -12,7 +12,7 @@ const Ships = ({userToken}) =>{
         const getShips = async () =>{
             const list = await getShipsList(userToken)
             setShipList(list.shipListings)
-            console.log(list)
+           
         }
         getShips()
     },[])
@@ -24,12 +24,14 @@ const Ships = ({userToken}) =>{
                 ?
                 <Text>ACEDIENDO AL CATALOGO DE NAVES</Text>
                 :
-                <View>
+                <View style={Styles.containerList}>
                     <Text>LISTA DE NAVES DISPONIBLES</Text>
-                    <FlatList data={shipList} renderItem={(List) =>{
+                    <FlatList style={Styles.list} data={shipList} renderItem={(List) =>{
+                        console.log(List)
                             return(
                                 <InfoShips
-                                    key={List.item.type}
+                                    key={List.index}
+                                    shipList={List.item}
                                     />
                             )
                             
@@ -46,7 +48,12 @@ const Ships = ({userToken}) =>{
 
 const Styles = StyleSheet.create({
     containerList:{
-
+        justifyContent:"center",
+        alignItems:"center",
+        
+    },
+    list:{
+        width:"80%"
     }
 })
 
