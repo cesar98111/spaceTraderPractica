@@ -132,7 +132,9 @@ export default function App() {
               <Drawer.Screen name="Home">
                 {()=><Home userAcount={userAcount} userToken={userToken}/>}
               </Drawer.Screen> 
-              <Drawer.Screen name="Loans"  component={Loans}/>
+              <Drawer.Screen name="Loans">
+                {() => <Loans userToken={userToken}/>}
+              </Drawer.Screen>
               <Drawer.Screen name="Ships">
                 {() => <Ships userToken={userToken}/>}
               </Drawer.Screen>
