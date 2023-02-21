@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { View, Text, Pressable, StyleSheet, TextInput } from "react-native"
+import { View, Text, Pressable, StyleSheet, TextInput, ImageBackground } from "react-native"
 import ModalError from "../modal/ModalError"
 import { useNavigation } from "@react-navigation/native"
 
@@ -32,27 +32,32 @@ const Register = ({createUserAcount}) =>{
 
 
     return(
-        <View style={Styles.containerLogin}>
-                <ModalError error={error} setError={setError}/>
-                <Text style={Styles.titleLogin}>PLEASE, INTRODUCE YOUR USERNAME</Text>
-                <View style={Styles.buttonBox}>
-                    <TextInput style={Styles.inputLogin}
-                    placeholder="introduce userName"
-                    onChangeText={handlerNameChange}
-                    value={name}/>
-                    <View style={Styles.buttonContainer}>
-                        <Pressable style={Styles.registerButton} onPress={handlerRegister}>
-                            <Text style={Styles.textButton}>
-                                Registrer
-                            </Text>
-                        </Pressable>
-                        <Pressable onPress={()=> navigate.goBack()} style={Styles.cancelButton}>
-                            <Text style={Styles.textButton}>Cancel</Text>
-                        </Pressable>
+        <ImageBackground source={require("../../assets/nave.jpg")} style={{height:"100%", width:"100%", position:"relative"}}  resizeMode="cover" >
+            <View style={Styles.containerLogin}>
+                
+                    <ModalError error={error} setError={setError}/>
+                    <Text style={Styles.titleLogin}>PLEASE, INTRODUCE YOUR USERNAME</Text>
+                    <View style={Styles.buttonBox}>
+                        <TextInput style={Styles.inputLogin}
+                        placeholder="introduce userName"
+                        onChangeText={handlerNameChange}
+                        value={name}/>
+                        <View style={Styles.buttonContainer}>
+                            <Pressable style={Styles.registerButton} onPress={handlerRegister}>
+                                <Text style={Styles.textButton}>
+                                    Registrer
+                                </Text>
+                            </Pressable>
+                            <Pressable onPress={()=> navigate.goBack()} style={Styles.cancelButton}>
+                                <Text style={Styles.textButton}>Cancel</Text>
+                            </Pressable>
+                        </View>
+                        
                     </View>
+                
                     
-                </View>
             </View>
+        </ImageBackground>
     )
 }
 

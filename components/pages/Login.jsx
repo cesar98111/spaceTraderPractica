@@ -43,16 +43,16 @@ const styles = StyleSheet.create({
     loginButton:{
         width:"40%",
         height:"10%",
-        backgroundColor:"#6AA0EE",
-        borderColor:"blue",
+        backgroundColor:"#00252E",
+        borderColor:"#00141A",
         borderStyle:"solid",
         borderWidth:3
     },
     registerButton:{
         width:"40%",
         height:"10%",
-        backgroundColor:"#FCC02D",
-        borderColor:"orange",
+        backgroundColor:"#AB6100",
+        borderColor:"#663600",
         borderStyle:"solid",
         borderWidth:3
     },

@@ -1,7 +1,7 @@
 
 import { useNavigation } from "@react-navigation/native"
 import { useState } from "react"
-import { View, Text, StyleSheet, Pressable, TextInput} from "react-native"
+import { View, Text, StyleSheet, Pressable, TextInput, ImageBackground} from "react-native"
 
 
 
@@ -38,38 +38,39 @@ const SignUp= ({getUserAcount}) => {
         }
         setToken('')
     }
-            
-        
-        
-        
-    
 
     const navigate = useNavigation()
     return(
-        <View style ={Styles.containerToken}>
-            <Text style={Styles.titleLogin}>
-                introduce your Token
-            </Text>
-            <TextInput
-                placeholder="token"
-                style={{...Styles.loginInput, borderColor:color}}
-                value={token}
-                onChangeText={handlerChangeText}
-                />
-            <View style={Styles.containerButton}>
-                <Pressable style={Styles.buttonLogin} onPress={handlerLogin}>
-                    <Text style={Styles.buttonText} >
-                        Login
-                    </Text>
-                </Pressable>
 
-                <Pressable style={Styles.buttonCancel} onPress={() => navigate.goBack()}>
-                    <Text style={Styles.buttonText}>
-                        Cancel
+        <ImageBackground sourse={require("../../assets/nave.jpg") } style={{height:"100%", width:"100%"}} resizeMode="cover">
+            <View style ={Styles.containerToken}>
+                
+                    <Text style={Styles.titleLogin}>
+                        introduce your Token
                     </Text>
-                </Pressable>
+                    <TextInput
+                        placeholder="token"
+                        style={{...Styles.loginInput, borderColor:color}}
+                        value={token}
+                        onChangeText={handlerChangeText}
+                        />
+                    <View style={Styles.containerButton}>
+                        <Pressable style={Styles.buttonLogin} onPress={handlerLogin}>
+                            <Text style={Styles.buttonText} >
+                                Login
+                            </Text>
+                        </Pressable>
+
+                        <Pressable style={Styles.buttonCancel} onPress={() => navigate.goBack()}>
+                            <Text style={Styles.buttonText}>
+                                Cancel
+                            </Text>
+                        </Pressable>
+                    </View>
+                
             </View>
-        </View>
+        </ImageBackground>
+        
     )
 }
 
@@ -80,10 +81,9 @@ const Styles  = StyleSheet.create(
     {   
 
         containerToken:{
-            flexDirection:"column",
             height:"100%",
             width:"100%",
-            justifyContent:"space-evenly",
+            justifyContent:"space-around",
             alignItems:"center"
         },
         containerButton:{
@@ -122,10 +122,12 @@ const Styles  = StyleSheet.create(
             borderWidth:1,
             textAlign:"center",
             fontSize:20
+        },
+        image:{
+            height:"100%",
+            width:"100%",
+            
         }
-
-
-
     }
 )
 
