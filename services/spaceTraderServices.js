@@ -54,11 +54,37 @@ const showLoans = async (token) =>{
     }
 } 
 
+const takeAvaliableLoans = async (token, typeLoans) =>{
+    try{
+        
+        console.log(typeLoans)
+        const response = await fetch(`${endPoints.createUser}/my/loans?token=${token}`,{
+            method:"POST",
+            body:JSON.stringify({
+                type: "STARTUP"
+            }),
+            headers:{
+                'Content-type':'application/json'
+            }
+        })
+        const data = await response.json()
+        console.log(data)
+        return data
+    }catch(err){
+        console.log(err)
+        return null
+    }
+        
+
+    
+}
+
 
 
 export {
     createUser,
     requestUserAcount,
     getShipsList,
-    showLoans
+    showLoans, 
+    takeAvaliableLoans
 }

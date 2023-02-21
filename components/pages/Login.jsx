@@ -1,5 +1,5 @@
 
-import {View, Text, StyleSheet, Pressable, TextInput} from 'react-native'
+import {View, Text, StyleSheet, Pressable, ImageBackground} from 'react-native'
 
 
 
@@ -13,17 +13,19 @@ const Login = () =>{
 
             <>
                 <View style={styles.containerLogin}>
-                    <Text style={styles.titleLogin}>BIENVENIDO A SPACETRADER</Text>
-                    <View style={styles.buttonBox}>
-                        <Pressable style={styles.loginButton} onPress={()=> navigate.navigate("SignUp")}>
-                            <Text style={styles.textButton}>Login</Text>
-                        </Pressable>
-                        <Pressable style={styles.registerButton} onPress={() => navigate.navigate("Register")}>
-                            <Text style={styles.textButton}>
-                                Register
-                            </Text>
-                        </Pressable>
-                    </View>
+                    <ImageBackground source={require("../../assets/login.jpg")} style={{height:"100%", width:"100%", position:"relative"}}  resizeMode="cover" >
+                        <Text style={styles.titleLogin}>BIENVENIDO A SPACETRADER</Text>
+                        <View style={styles.buttonBox}>
+                            <Pressable style={styles.loginButton} onPress={()=> navigate.navigate("SignUp")}>
+                                <Text style={styles.textButton}>Login</Text>
+                            </Pressable>
+                            <Pressable style={styles.registerButton} onPress={() => navigate.navigate("Register")}>
+                                <Text style={styles.textButton}>
+                                    Register
+                                </Text>
+                            </Pressable>
+                        </View>
+                    </ImageBackground>
                 </View>
 
         </>
@@ -41,12 +43,18 @@ const styles = StyleSheet.create({
     loginButton:{
         width:"40%",
         height:"10%",
-        backgroundColor:"#6AA0EE"
+        backgroundColor:"#6AA0EE",
+        borderColor:"blue",
+        borderStyle:"solid",
+        borderWidth:3
     },
     registerButton:{
         width:"40%",
         height:"10%",
-        backgroundColor:"#FCC02D"
+        backgroundColor:"#FCC02D",
+        borderColor:"orange",
+        borderStyle:"solid",
+        borderWidth:3
     },
     textButton:{
         height:"100%",
@@ -57,21 +65,19 @@ const styles = StyleSheet.create({
         fontWeight:"bold"
     },
     buttonBox:{
-        justifyContent:"center",
+        justifyContent:"space-around",
         alignItems:"center",
         height:"50%",
         width:"100%"
     },
     titleLogin:{
+        marginTop:40,
         fontSize:30,
         fontWeight:"bold",
-        textAlign:"center"
+        textAlign:"center",
+        color:"white"
     },
-    cancelButton:{
-        width:"40%",
-        height:"10%",
-        backgroundColor:"#FF1C01"
-    },
+    
     inputLogin:{
         borderStyle:"solid",
         borderWidth:1,

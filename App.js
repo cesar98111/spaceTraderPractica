@@ -7,7 +7,7 @@ import { NavigationAction, NavigationContainer } from '@react-navigation/native'
 import {RootSiblingParent} from  'react-native-root-siblings'
 
 import * as SecureStore from 'expo-secure-store'
-import {createUser, requestUserAcount} from './services/spaceTraderServices';
+import {createUser, requestUserAcount, takeAvaliableLoans} from './services/spaceTraderServices';
 
 
 import { useEffect, useState } from 'react';
@@ -23,17 +23,24 @@ import SignUp from './components/pages/SignUp';
 
 const Drawer = createDrawerNavigator()
 const KEY_STORAGE = "my-key"
+const KEY_PHOTO_STORAGE = "my-photo"
 
 export default function App() {
   
   const [userAcount , setUserAcount] = useState()
   const [userToken , setUserToken] = useState()
-  
-
+  const [avatar, setAvatar] = useState({
+    foto1:"../../assets/astronauta.png",
+    foto2:"../../assets/foto2.jpg",
+    foto3:"../../assets/foto3.jpg"
+  })
+  const[userAvatar, setUserAvatar] = useState()
   useEffect(()=>{
     const renderGetUserAcount = async() =>{
       try{
-      
+        
+        setUserAvatar(avatar[await SecureStore.getItemAsync(KEY_PHOTO_STORAGE)])
+        
         const data = await SecureStore.getItemAsync(KEY_STORAGE)
         console.log(data)
         
@@ -62,15 +69,18 @@ export default function App() {
   const createUserAcount = async (userName) =>{
   
     try{
-                
+      const listKeysAvatar = Object.keys(avatar)  
+
       const data = await createUser(userName)
       
       if(data.token !== undefined){
-        console.log("hola")
+        const keyAvatar = listKeysAvatar[Math.floor(Math.random()*3)]
         await SecureStore.setItemAsync(KEY_STORAGE, data.token)
-         
+        await SecureStore.setItemAsync(KEY_PHOTO_STORAGE, keyAvatar) 
         const user = await requestUserAcount(data.token)
-        console.log(user)
+        
+
+        setUserAvatar(keyAvatar)
         setUserToken(data.token)
         setUserAcount(user)
         return false
@@ -91,8 +101,10 @@ export default function App() {
     
       try{
           const user = await requestUserAcount(token)
-          
+          const listKeysAvatar = Object.keys(avatar) 
           if(user.error === undefined){
+            const keyAvatar = listKeysAvatar[Math.floor(Math.random()*3)]
+            await SecureStore.setItemAsync(KEY_PHOTO_STORAGE, keyAvatar) 
             await SecureStore.setItemAsync(KEY_STORAGE,token)
             setUserAcount(user)
             return false
@@ -109,7 +121,18 @@ export default function App() {
 
   }
 
-  
+  const takeLoans = async(loans) =>{
+    
+    try{
+        
+        await takeAvaliableLoans(userToken, loans)
+        setUserAcount( await requestUserAcount(userToken))
+        
+    }catch(err){
+        console.log(err)
+    }
+   
+}
   return (
    <RootSiblingParent>
       <NavigationContainer documentTitle={false}>
@@ -130,10 +153,10 @@ export default function App() {
             :
             <>
               <Drawer.Screen name="Home">
-                {()=><Home userAcount={userAcount} userToken={userToken}/>}
+                {()=><Home userAcount={userAcount} userToken={userToken} userAvatar={userAvatar}/>}
               </Drawer.Screen> 
               <Drawer.Screen name="Loans">
-                {() => <Loans userToken={userToken}/>}
+                {() => <Loans userToken={userToken} takeLoans={takeLoans}/>}
               </Drawer.Screen>
               <Drawer.Screen name="Ships">
                 {() => <Ships userToken={userToken}/>}

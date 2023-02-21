@@ -1,7 +1,24 @@
 
 import { View, Text, StyleSheet, Pressable } from "react-native";
+import { takeAvaliableLoans } from "../../services/spaceTraderServices";
+import { useNavigation } from "@react-navigation/native";
+import { useEffect, useState } from "react";
 
-const InfoLoans = ({loans, userToken}) =>{
+const InfoLoans = ({loans, takeLoans}) =>{
+
+    const navigate = useNavigation()
+
+    const handlerLoans = async() =>{
+        try{
+            await takeLoans(loans.type)
+            navigate.navigate("Home")
+        }catch(err){
+            console.log(err)
+        }
+        
+    }
+     
+
     return(
     <View style={Styles.loansContainer}>
         <Text style={Styles.textStyle}>{loans.amount} Crd</Text>
@@ -9,7 +26,7 @@ const InfoLoans = ({loans, userToken}) =>{
         <Text style={Styles.textStyle}>Term: {loans.termInDays}</Text>
         <Text style={Styles.textStyle}>Type: {loans.type}</Text>
         <View style={Styles.buttonContainer}>
-            <Pressable style={Styles.buttonTake}>
+            <Pressable style={Styles.buttonTake} onPress={handlerLoans}>
                 <Text style={Styles.textButton}>Take out</Text>
             </Pressable>
         </View>

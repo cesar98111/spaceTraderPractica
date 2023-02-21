@@ -1,11 +1,23 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {View, Text , StyleSheet ,Image, Pressable} from 'react-native'
+import { floor } from 'react-native-reanimated'
 import Token from '../modal/Token'
 
-const Home = ({userAcount, userToken}) =>{
-
+const Home = ({userAcount, userToken, userAvatar}) =>{
+    
     const [show, setShow] = useState(false)
+    useEffect(()=>{
+        const hola = {
+            name:"juan",
+            pasa:"pepe"
+        }
+        console.log(hola["pasa"])
+        console.log(Math.floor(Math.random()*3))
+        console.log(Object.keys(hola))
+    },[])
+
+    
 
     return(
         <View style={styles.containerProfile}>

@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 import { showLoans } from "../../services/spaceTraderServices";
 import InfoLoans from "../Views/InfoLoans";
 
-const Loans = ({userToken}) =>{
+const Loans = ({userToken ,takeLoans}) =>{
 
     const [loansList, setLoansList] = useState()
 
     useEffect(()=>{
         const getLoansList = async() =>{
+            
             const data = await showLoans(userToken)
             setLoansList(data.loans)
         }
@@ -33,7 +34,7 @@ const Loans = ({userToken}) =>{
                             <InfoLoans
                                 key={list.index} 
                                 loans={list.item}
-                                userToken={userToken}
+                                takeLoans={takeLoans}
                             />
                         )
                     }} />
