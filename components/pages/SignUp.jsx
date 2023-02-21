@@ -15,7 +15,7 @@ const SignUp= ({getUserAcount}) => {
     }
 
     const handlerLogin = async () =>{
-        console.log("hola")
+        
         if(token!==''){
             
             setError(await getUserAcount(token))
@@ -42,34 +42,36 @@ const SignUp= ({getUserAcount}) => {
     const navigate = useNavigation()
     return(
 
-        <ImageBackground sourse={require("../../assets/nave.jpg") } style={{height:"100%", width:"100%"}} resizeMode="cover">
+        <ImageBackground source={require("../../assets/sigin.jpg")} style={{height:"100%", width:"100%"}}>
             <View style ={Styles.containerToken}>
-                
-                    <Text style={Styles.titleLogin}>
-                        introduce your Token
-                    </Text>
-                    <TextInput
-                        placeholder="token"
-                        style={{...Styles.loginInput, borderColor:color}}
-                        value={token}
-                        onChangeText={handlerChangeText}
-                        />
-                    <View style={Styles.containerButton}>
-                        <Pressable style={Styles.buttonLogin} onPress={handlerLogin}>
-                            <Text style={Styles.buttonText} >
-                                Login
-                            </Text>
-                        </Pressable>
 
-                        <Pressable style={Styles.buttonCancel} onPress={() => navigate.goBack()}>
-                            <Text style={Styles.buttonText}>
-                                Cancel
-                            </Text>
-                        </Pressable>
-                    </View>
-                
+                <Text style={Styles.titleLogin}>
+                    introduce your Token
+                </Text>
+                <TextInput
+                    placeholder="token"
+                    style={{...Styles.loginInput, borderColor:color}}
+                    value={token}
+                    onChangeText={handlerChangeText}
+                    />
+                <View style={Styles.containerButton}>
+                    <Pressable style={Styles.buttonLogin} onPress={handlerLogin}>
+                        <Text style={Styles.buttonText} >
+                            Login
+                        </Text>
+                    </Pressable>
+
+                    <Pressable style={Styles.buttonCancel} onPress={() => navigate.goBack()}>
+                        <Text style={Styles.buttonText}>
+                            Cancel
+                        </Text>
+                    </Pressable>
+                </View>
+
             </View>
         </ImageBackground>
+            
+        
         
     )
 }
@@ -84,7 +86,8 @@ const Styles  = StyleSheet.create(
             height:"100%",
             width:"100%",
             justifyContent:"space-around",
-            alignItems:"center"
+            alignItems:"center",
+            
         },
         containerButton:{
             flexDirection:"row",
@@ -103,7 +106,8 @@ const Styles  = StyleSheet.create(
         },
         titleLogin:{
             fontSize:30,
-            fontWeight:"bold"
+            fontWeight:"bold",
+            color:"white"
         },  
         buttonLogin:{
             height:40,
@@ -121,7 +125,9 @@ const Styles  = StyleSheet.create(
             borderStyle:"solid",
             borderWidth:1,
             textAlign:"center",
-            fontSize:20
+            fontSize:20,
+            backgroundColor:"#002129",
+            color:"white"
         },
         image:{
             height:"100%",

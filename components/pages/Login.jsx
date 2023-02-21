@@ -11,24 +11,24 @@ const Login = () =>{
 
     return(
 
-            <>
-                <View style={styles.containerLogin}>
-                    <ImageBackground source={require("../../assets/login.jpg")} style={{ flex:1 , justifyContent:"center"}}  resizeMode="cover" >
-                        <Text style={styles.titleLogin}>BIENVENIDO A SPACETRADER</Text>
-                        <View style={styles.buttonBox}>
-                            <Pressable style={styles.loginButton} onPress={()=> navigate.navigate("SignUp")}>
-                                <Text style={styles.textButton}>Login</Text>
-                            </Pressable>
-                            <Pressable style={styles.registerButton} onPress={() => navigate.navigate("Register")}>
-                                <Text style={styles.textButton}>
-                                    Register
-                                </Text>
-                            </Pressable>
-                        </View>
-                    </ImageBackground>
-                </View>
+                <ImageBackground source={require("../../assets/nave1.jpg")} style={{height:"100%", width:"100%"}} resizeMode="cover" >
+                    <View style={styles.containerLogin}>
+                        
+                            <Text style={styles.titleLogin}>BIENVENIDO A SPACETRADER</Text>
+                            <View style={styles.buttonBox}>
+                                <Pressable style={styles.loginButton} onPress={()=> navigate.navigate("SignUp")}>
+                                    <Text style={styles.textButton}>Login</Text>
+                                </Pressable>
+                                <Pressable style={styles.registerButton} onPress={() => navigate.navigate("Register")}>
+                                    <Text style={styles.textButton}>
+                                        Register
+                                    </Text>
+                                </Pressable>
+                            </View>    
+                    </View>
+                </ImageBackground>
 
-        </>
+        
         
     )
 }

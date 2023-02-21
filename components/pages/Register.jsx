@@ -35,25 +35,25 @@ const Register = ({createUserAcount}) =>{
         <ImageBackground source={require("../../assets/nave.jpg")} style={{height:"100%", width:"100%", position:"relative"}}  resizeMode="cover" >
             <View style={Styles.containerLogin}>
                 
-                    <ModalError error={error} setError={setError}/>
-                    <Text style={Styles.titleLogin}>PLEASE, INTRODUCE YOUR USERNAME</Text>
-                    <View style={Styles.buttonBox}>
-                        <TextInput style={Styles.inputLogin}
-                        placeholder="introduce userName"
-                        onChangeText={handlerNameChange}
-                        value={name}/>
-                        <View style={Styles.buttonContainer}>
-                            <Pressable style={Styles.registerButton} onPress={handlerRegister}>
-                                <Text style={Styles.textButton}>
-                                    Registrer
-                                </Text>
-                            </Pressable>
-                            <Pressable onPress={()=> navigate.goBack()} style={Styles.cancelButton}>
-                                <Text style={Styles.textButton}>Cancel</Text>
-                            </Pressable>
-                        </View>
+                <ModalError error={error} setError={setError}/>
+                <Text style={Styles.titleLogin}>PLEASE, INTRODUCE YOUR USERNAME</Text>
+                
+                <TextInput style={Styles.inputLogin}
+                    placeholder="introduce userName"
+                    onChangeText={handlerNameChange}
+                    value={name}/>
+                <View style={Styles.buttonContainer}>
+                    <Pressable style={Styles.registerButton} onPress={handlerRegister}>
+                        <Text style={Styles.textButton}>
+                            Registrer
+                        </Text>
+                    </Pressable>
+                    <Pressable onPress={()=> navigate.goBack()} style={Styles.cancelButton}>
+                        <Text style={Styles.textButton}>Cancel</Text>
+                    </Pressable>
+                </View>
                         
-                    </View>
+                    
                 
                     
             </View>
@@ -71,18 +71,16 @@ const Styles = StyleSheet.create({
         fontWeight:"bold"
     },
     registerButton:{
-        width:"40%",
-        height:"10%",
+        width:"30%",
+        height:40,
         backgroundColor:"#FCC02D"
     },
     buttonBox:{
         justifyContent:"center",
         alignItems:"center",
-        height:"50%",
         width:"100%"
     },
     buttonContainer:{
-        height:"100%",
         width:"100%",
         flexDirection:"row",
         justifyContent:"space-around",
@@ -91,14 +89,18 @@ const Styles = StyleSheet.create({
     titleLogin:{
         fontSize:30,
         fontWeight:"bold",
-        textAlign:"center"
+        textAlign:"center",
+        color:"white"
     },
     inputLogin:{
         borderStyle:"solid",
         borderWidth:1,
         height:40,
         width:200,
-        marginBottom:40
+        marginBottom:40,
+        backgroundColor:"#002129",
+        color:"white",
+        textAlign:"center"
     },
     containerLogin:{
         width:"100%",
@@ -107,8 +109,8 @@ const Styles = StyleSheet.create({
         alignItems:"center"
     },
     cancelButton:{
-        width:"40%",
-        height:"10%",
+        width:"30%",
+        height:40,
         backgroundColor:"#FF1C01"
     },
 })

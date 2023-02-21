@@ -13,7 +13,7 @@ const Menu = ({navigation, userAcount}) =>{
         console.log(userAcount)
     },[])
     return(
-        <DrawerContentScrollView>
+        <DrawerContentScrollView style={{backgroundColor:"#00141A"}}>
             {
                 (userAcount === undefined) || (userAcount === null)
                 ?
@@ -94,6 +94,7 @@ const Styles = StyleSheet.create({
         textAlign:"center",
         textAlignVertical:"center",
         fontSize:30,
+        color:"white"
         
     }
     
