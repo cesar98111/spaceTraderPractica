@@ -19,7 +19,7 @@ import Loans from './components/pages/Loans';
 import Ships from './components/pages/Ships';
 import Register from './components/pages/Register';
 import SignUp from './components/pages/SignUp';
-
+import Menu from './components/menu/Menu';
 
 const Drawer = createDrawerNavigator()
 const KEY_STORAGE = "my-key"
@@ -42,7 +42,7 @@ export default function App() {
         setUserAvatar(avatar[await SecureStore.getItemAsync(KEY_PHOTO_STORAGE)])
         
         const data = await SecureStore.getItemAsync(KEY_STORAGE)
-        console.log(data)
+        
         
         if(data){
           setUserToken(data)
@@ -136,7 +136,7 @@ export default function App() {
   return (
    <RootSiblingParent>
       <NavigationContainer documentTitle={false}>
-        <Drawer.Navigator initialRouteName='Home' >
+        <Drawer.Navigator initialRouteName='Home' drawerContent={(prop) => <Menu {...prop} userAcount={userAcount}/>} >
           {
             (userAcount === undefined)||(userAcount === null)?
             <>

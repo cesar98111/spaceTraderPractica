@@ -13,7 +13,7 @@ const Login = () =>{
 
             <>
                 <View style={styles.containerLogin}>
-                    <ImageBackground source={require("../../assets/login.jpg")} style={{height:"100%", width:"100%", position:"relative"}}  resizeMode="cover" >
+                    <ImageBackground source={require("../../assets/login.jpg")} style={{ flex:1 , justifyContent:"center"}}  resizeMode="cover" >
                         <Text style={styles.titleLogin}>BIENVENIDO A SPACETRADER</Text>
                         <View style={styles.buttonBox}>
                             <Pressable style={styles.loginButton} onPress={()=> navigate.navigate("SignUp")}>

@@ -1,38 +1,28 @@
-import {View, Text} from 'react-native'
+import {View, Text ,StyleSheet, Pressable} from 'react-native'
 import { useEffect } from 'react'
 
 import * as SecureStore from 'expo-secure-store'
-
+import { useNavigation } from '@react-navigation/native'
 
 const KEY_STORAGE = "my-key"
 
 const Logout = ({setUserAcount}) =>{
     
-    
-
     useEffect(()=>{
-        const deleteStorage = async() =>{
-            try{
-                await SecureStore.deleteItemAsync(KEY_STORAGE) 
-                setUserAcount(null)   
-            }catch(err){
-                console.log(err)
-            }
-        }
-    setTimeout(()=>{
-        console.log("paco")
-        deleteStorage()
-    },2000)
-        
+        setTimeout(()=>{
+            setUserAcount(null)
+        },2000)
     },[])
-    
     return(
-        <View>
-            <Text>
-                LOGOUT
-            </Text>
+        <View style={Styles.container}>
+            <Text>LOGOUT</Text>
+           
         </View>
     )
 }
+
+const Styles = StyleSheet.create({
+   
+})
 
 export default Logout
