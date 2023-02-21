@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { View, Text, StyleSheet, Image } from "react-native"
 
 const InfoShips = ({shipList}) =>{
-    const [image, setImage] = useState('')
+    
     
 
     const renderImage = () =>{

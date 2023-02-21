@@ -25,7 +25,7 @@ const Ships = ({userToken}) =>{
                 <Text>ACEDIENDO AL CATALOGO DE NAVES</Text>
                 :
                 <View style={Styles.containerList}>
-                    <Text>LISTA DE NAVES DISPONIBLES</Text>
+                    <Text style={Styles.titleText}>LISTA DE NAVES DISPONIBLES</Text>
                     <FlatList style={Styles.list} data={shipList} renderItem={(List) =>{
                         console.log(List)
                             return(
@@ -54,6 +54,12 @@ const Styles = StyleSheet.create({
     },
     list:{
         width:"80%"
+    },
+    titleText:{
+        marginTop:20,
+        marginBottom:20,
+        fontWeight:"bold",
+        fontSize:25
     }
 })
 
