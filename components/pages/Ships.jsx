@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, FlatList, ImageBackground } from "react-native";
 import { getShipsList } from "../../services/spaceTraderServices";
 
 import InfoShips from "../Views/InfoShips";
@@ -18,12 +18,13 @@ const Ships = ({userToken}) =>{
     },[])
 
     return(
-        <View>
+        <ImageBackground source={require("../../assets/hangar.jpg")}>
             {
                 shipList === null
                 ?
                 <Text>ACEDIENDO AL CATALOGO DE NAVES</Text>
                 :
+                
                 <View style={Styles.containerList}>
                     <Text style={Styles.titleText}>LISTA DE NAVES DISPONIBLES</Text>
                     <FlatList style={Styles.list} data={shipList} renderItem={(List) =>{
@@ -41,7 +42,9 @@ const Ships = ({userToken}) =>{
                 </View>
                 
             }
-        </View>
+        </ImageBackground>
+            
+       
     )
 }
 
@@ -53,13 +56,15 @@ const Styles = StyleSheet.create({
         
     },
     list:{
-        width:"80%"
+        width:"80%",
+        height:"89%"
     },
     titleText:{
         marginTop:20,
         marginBottom:20,
         fontWeight:"bold",
-        fontSize:25
+        fontSize:25,
+        color:"white"
     }
 })
 

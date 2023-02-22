@@ -38,7 +38,7 @@ const InfoLoans = ({loans, takeLoans}) =>{
 
 const Styles = StyleSheet.create({
     loansContainer:{
-        backgroundColor:"#2569F0",
+        backgroundColor:"#00141A",
         width:"100%",
         padding:20
     },
@@ -54,12 +54,19 @@ const Styles = StyleSheet.create({
         
     },
     buttonTake:{
-        backgroundColor:"#FCC02D",
+        backgroundColor:"#AB6100",
         width:"40%",
-        padding:7
+        padding:7,
+        borderStyle:"solid",
+        borderWidth:1,
+        borderColor:"#663600"
+        
     },
     textButton:{
-        textAlign:"center"
+        textAlign:"center",
+        color:"white",
+        fontSize:15,
+        fontWeight:"bold"
     }
     
 })

@@ -1,4 +1,4 @@
-import {View, Text ,StyleSheet, Pressable} from 'react-native'
+import {View, Text ,StyleSheet, Pressable, ImageBackground} from 'react-native'
 import { useEffect } from 'react'
 
 import * as SecureStore from 'expo-secure-store'
@@ -20,23 +20,26 @@ const Logout = ({setUserAcount}) =>{
         }
     }
     return(
-        <View style={Styles.container}>
-            <View style={Styles.containerLogout}>
-                <Text style={Styles.titleText}>¿ESTAS SEGURO QUE QUIERE SALIR?</Text>
-                <View style={Styles.containerButton}>
-                    <Pressable onPress={() => handlerExit()} style={Styles.buttonExit}>
-                        <Text style={Styles.textButton}>
-                            exit
-                        </Text>
-                    </Pressable>
-                    <Pressable onPress={() => navigate.goBack() } style={Styles.buttonCancel}>
-                        <Text style={Styles.textButton}>
-                            cancel
-                        </Text>
-                    </Pressable>
+        <ImageBackground source={require("../../assets/hiper.jpg")} style={{height:"100%", width:"100%"}}>
+            <View style={Styles.container}>
+                <View style={Styles.containerLogout}>
+                    <Text style={Styles.titleText}>¿ESTAS SEGURO QUE QUIERE SALIR?</Text>
+                    <View style={Styles.containerButton}>
+                        <Pressable onPress={() => handlerExit()} style={Styles.buttonExit}>
+                            <Text style={Styles.textButton}>
+                                exit
+                            </Text>
+                        </Pressable>
+                        <Pressable onPress={() => navigate.goBack() } style={Styles.buttonCancel}>
+                            <Text style={Styles.textButton}>
+                                cancel
+                            </Text>
+                        </Pressable>
+                    </View>
                 </View>
             </View>
-        </View>
+        </ImageBackground>
+        
     )
 }
 
@@ -44,12 +47,14 @@ const Styles = StyleSheet.create({
     containerLogout:{
         height:"50%",
         width:"80%",
-        backgroundColor:"#CCCCCC",
-        justifyContent:"center",
+        backgroundColor:"#00141A",
+        justifyContent:"space-around",
         alignItems:"center",
         
     },
     container:{
+        height:"100%",
+        width:"100%",
         justifyContent:"center",
         alignItems:"center"
     },
@@ -86,7 +91,9 @@ const Styles = StyleSheet.create({
     },
     titleText:{
         fontSize:20,
-        textAlign:"center"
+        textAlign:"center",
+        fontWeight:"bold",
+        color:"white"
     }
     
 })

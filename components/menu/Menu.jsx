@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useEffect, useState } from "react"
 
 
-const Menu = ({navigation, userAcount}) =>{
+const Menu = ({navigation, userAcount, renderImage}) =>{
     const navigate = useNavigation()
     const [user, setUser] = useState(userAcount)
     useEffect(()=>{
@@ -26,7 +26,7 @@ const Menu = ({navigation, userAcount}) =>{
                 :
                 <View style={Styles.container}>
                     <View style={Styles.containerProfile}>
-                        <Image source={require("../../assets/astronauta.png")} style={Styles.image}/>
+                        <Image source={renderImage()} style={Styles.image}/>
                         <Text style={Styles.textProfile}>{userAcount.user.username}</Text>
                     </View>
                     

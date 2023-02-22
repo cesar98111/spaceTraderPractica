@@ -1,51 +1,43 @@
 
 import { useEffect, useState } from 'react'
-import {View, Text , StyleSheet ,Image, Pressable} from 'react-native'
+import {View, Text , StyleSheet ,Image, Pressable, ImageBackground} from 'react-native'
 import { floor } from 'react-native-reanimated'
 import Token from '../modal/Token'
 
-const Home = ({userAcount, userToken, userAvatar}) =>{
+const Home = ({userAcount, userToken, renderImage}) =>{
     
     const [show, setShow] = useState(false)
-    useEffect(()=>{
-        const hola = {
-            name:"juan",
-            pasa:"pepe"
-        }
-        console.log(hola["pasa"])
-        console.log(Math.floor(Math.random()*3))
-        console.log(Object.keys(hola))
-    },[])
-
     
-
     return(
-        <View style={styles.containerProfile}>
-            <View style={styles.headerProfile}>
-                <Image source={require("../../assets/astronauta.png")} style={styles.imageProfile}/>
-                <Text style={styles.textProfile}>
-                    {userAcount.user.username}
-                </Text>
-                <Pressable style={styles.buttonToken} onPress={()=> setShow(true)}>
-                    <Text style={styles.buttonText}>Token</Text>
-                </Pressable>
-            </View>
-            <View style={styles.creditProfile}>
-                <Text style={styles.textProfile}>creditos: {userAcount.user.credits} </Text>                
-            </View>
-            <View style={styles.statusProfile}>
-                <View style={styles.properties}>
-                    <Image source={require("../../assets/spaceShip.png")} style={styles.imageIcons}/>
-                    <Text style={styles.textProfile}> {userAcount.user.shipCount}</Text>
+        <ImageBackground source={require("../../assets/city.jpg")} style={{height:"100%", width:"100%"}}>
+            <View style={styles.containerProfile}>
+                <View style={styles.headerProfile}>
+                    <Image source={renderImage()} style={styles.imageProfile}/>
+                    <Text style={styles.textProfile}>
+                        {userAcount.user.username}
+                    </Text>
+                    <Pressable style={styles.buttonToken} onPress={()=> setShow(true)}>
+                        <Text style={styles.buttonText}>Token</Text>
+                    </Pressable>
                 </View>
-                <View style={styles.properties}>
-                    <Image source={require("../../assets/structures.png")} style={styles.imageIcons}/>
-                    <Text style={styles.textProfile}> {userAcount.user.structureCount}</Text>
+                <View style={styles.creditProfile}>
+                    <Text style={styles.textProfile}>creditos: {userAcount.user.credits} </Text>                
                 </View>
-                <Token userToken={userToken} show={show} setShow={setShow}/>
-            </View>
+                <View style={styles.statusProfile}>
+                    <View style={styles.properties}>
+                        <Image source={require("../../assets/spaceShip.png")} style={styles.imageIcons}/>
+                        <Text style={styles.textProfile}> {userAcount.user.shipCount}</Text>
+                    </View>
+                    <View style={styles.properties}>
+                        <Image source={require("../../assets/structures.png")} style={styles.imageIcons}/>
+                        <Text style={styles.textProfile}> {userAcount.user.structureCount}</Text>
+                    </View>
+                    <Token userToken={userToken} show={show} setShow={setShow}/>
+                </View>
             
-        </View>
+            </View>
+        </ImageBackground>
+        
     )
 }
 
@@ -65,7 +57,7 @@ const styles = StyleSheet.create({
     headerProfile:{
         marginTop:30,
         flexDirection:"row",
-        backgroundColor:"#CCCCCC",
+        backgroundColor:"#00141A",
         alignItems:"center",
         justifyContent:"space-evenly",
         height:"25%",
@@ -77,12 +69,13 @@ const styles = StyleSheet.create({
         fontWeight:"bold",
         marginLeft:20,
         height:"100%",
-        textAlignVertical:"center"
+        textAlignVertical:"center",
+        color:"white"
     },
     creditProfile:{
         height:"15%",
         width:"80%",
-        backgroundColor:"#CCCCCC",
+        backgroundColor:"#00141A",
         borderRadius:20,
         justifyContent:"center",
         alignItems:"center"
@@ -94,9 +87,10 @@ const styles = StyleSheet.create({
     statusProfile:{
         height:"40%",
         width:"80%",
-        backgroundColor:"#CCCCCC",
+        backgroundColor:"#00141A",
         justifyContent:"space-around",
-        alignItems:"center"
+        alignItems:"center",
+        borderRadius:20
     },
     properties:{
         flexDirection:"row",

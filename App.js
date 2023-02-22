@@ -30,9 +30,9 @@ export default function App() {
   const [userAcount , setUserAcount] = useState()
   const [userToken , setUserToken] = useState()
   const [avatar, setAvatar] = useState({
-    foto1:"../../assets/astronauta.png",
-    foto2:"../../assets/foto2.jpg",
-    foto3:"../../assets/foto3.jpg"
+    foto1:"foto1",
+    foto2:"foto2",
+    foto3:"foto3"
   })
   const[userAvatar, setUserAvatar] = useState()
   useEffect(()=>{
@@ -43,14 +43,13 @@ export default function App() {
         
         const data = await SecureStore.getItemAsync(KEY_STORAGE)
         
-        
+        console.log(data)
         if(data){
           setUserToken(data)
           
           console.log(data)
           setUserAcount(await requestUserAcount(data))
-          
-          
+
         }
         
         
@@ -75,10 +74,11 @@ export default function App() {
       
       if(data.token !== undefined){
         const keyAvatar = listKeysAvatar[Math.floor(Math.random()*3)]
+        console.log(keyAvatar)
         await SecureStore.setItemAsync(KEY_STORAGE, data.token)
         await SecureStore.setItemAsync(KEY_PHOTO_STORAGE, keyAvatar) 
         const user = await requestUserAcount(data.token)
-        
+        console.log("asdads")
 
         setUserAvatar(keyAvatar)
         setUserToken(data.token)
@@ -122,21 +122,33 @@ export default function App() {
   }
 
   const takeLoans = async(loans) =>{
+      
+      try{
+          
+          await takeAvaliableLoans(userToken, loans)
+          setUserAcount( await requestUserAcount(userToken))
+          
+      }catch(err){
+          console.log(err)
+      }
     
-    try{
-        
-        await takeAvaliableLoans(userToken, loans)
-        setUserAcount( await requestUserAcount(userToken))
-        
-    }catch(err){
-        console.log(err)
+  }
+
+  const renderImage = () =>{
+    
+    switch(userAvatar){
+        case "foto1":
+            return require("./assets/astronauta.png")
+        case "foto2":
+            return require("./assets/foto2.jpg")
+        case "foto3":
+            return require("./assets/foto3.jpg")
     }
-   
-}
+  }
   return (
    <RootSiblingParent>
       <NavigationContainer documentTitle={false}>
-        <Drawer.Navigator initialRouteName='Home' drawerContent={(prop) => <Menu {...prop} userAcount={userAcount}/>} >
+        <Drawer.Navigator initialRouteName='Home' drawerContent={(prop) => <Menu {...prop} userAcount={userAcount} renderImage={renderImage}/>} >
           {
             (userAcount === undefined)||(userAcount === null)?
             <>
@@ -153,7 +165,7 @@ export default function App() {
             :
             <>
               <Drawer.Screen name="Home">
-                {()=><Home userAcount={userAcount} userToken={userToken} userAvatar={userAvatar}/>}
+                {()=><Home userAcount={userAcount} userToken={userToken} renderImage={renderImage}/>}
               </Drawer.Screen> 
               <Drawer.Screen name="Loans">
                 {() => <Loans userToken={userToken} takeLoans={takeLoans}/>}

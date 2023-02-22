@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, FlatList, ImageBackground } from "react-native";
 import { useEffect, useState } from "react";
 import { showLoans } from "../../services/spaceTraderServices";
 import InfoLoans from "../Views/InfoLoans";
@@ -19,7 +19,7 @@ const Loans = ({userToken ,takeLoans}) =>{
 
 
     return(
-        <View>
+        <ImageBackground source={require("../../assets/comercio.jpg")}>
             {
                 loansList === null
                 ?
@@ -42,7 +42,9 @@ const Loans = ({userToken ,takeLoans}) =>{
 
 
             }
-        </View>
+        </ImageBackground>
+            
+        
         
 
         

@@ -56,7 +56,7 @@ const InfoShips = ({shipList}) =>{
 const styles = StyleSheet.create({
     containerInfo:{
         width:"100%",
-        backgroundColor:"#2569F0",
+        backgroundColor:"#00141A",
         marginBottom:10,
         padding:30
     },
