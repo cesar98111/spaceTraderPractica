@@ -7,7 +7,7 @@ import { NavigationAction, NavigationContainer } from '@react-navigation/native'
 import {RootSiblingParent} from  'react-native-root-siblings'
 
 import * as SecureStore from 'expo-secure-store'
-import {createUser, requestUserAcount, takeAvaliableLoans} from './services/spaceTraderServices';
+import {createUser, requestUserAcount, takeAvaliableLoans, requestBuyShip} from './services/spaceTraderServices';
 
 
 import { useEffect, useState } from 'react';
@@ -121,6 +121,12 @@ export default function App() {
 
   }
 
+  const buyShips = async (location,type)=>{
+    console.log(location, type)
+    await requestBuyShip(userToken, type, location)
+    setUserAcount( await requestUserAcount(userToken))
+  }
+
   const takeLoans = async(loans) =>{
       
       try{
@@ -171,7 +177,7 @@ export default function App() {
                 {() => <Loans userToken={userToken} takeLoans={takeLoans}/>}
               </Drawer.Screen>
               <Drawer.Screen name="Ships">
-                {() => <Ships userToken={userToken}/>}
+                {() => <Ships userToken={userToken} buyShip={buyShips}/>}
               </Drawer.Screen>
               
               <Drawer.Screen name="Logout">

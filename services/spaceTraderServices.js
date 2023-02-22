@@ -57,7 +57,7 @@ const showLoans = async (token) =>{
 const takeAvaliableLoans = async (token, typeLoans) =>{
     try{
         
-        console.log(typeLoans)
+        
         const response = await fetch(`${endPoints.createUser}/my/loans?token=${token}`,{
             method:"POST",
             body:JSON.stringify({
@@ -74,9 +74,31 @@ const takeAvaliableLoans = async (token, typeLoans) =>{
         console.log(err)
         return null
     }
-        
+}
 
+const requestBuyShip = async(token, types, locations) =>{
+    try{
+        const response = await fetch(`${endPoints.createUser}/my/ships?token=${token}`,{
+            method:"POST",
+            body:JSON.stringify({
+                location:locations,
+                type:types
+            }),
+            headers:{
+                'Content-type':'application/json'
+            }
+        })
+
+        const data = await response.json()
+        return data
+
+
+    }catch(err){
+        console.log(err)
+    }
     
+    
+
 }
 
 
@@ -86,5 +108,6 @@ export {
     requestUserAcount,
     getShipsList,
     showLoans, 
-    takeAvaliableLoans
+    takeAvaliableLoans,
+    requestBuyShip
 }

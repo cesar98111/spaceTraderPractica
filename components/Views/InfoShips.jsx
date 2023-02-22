@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react"
-import { View, Text, StyleSheet, Image } from "react-native"
+import { View, Text, StyleSheet, Image, Pressable } from "react-native"
+import { requestBuyShip } from "../../services/spaceTraderServices"
 
-const InfoShips = ({shipList}) =>{
+const InfoShips = ({shipList, buyShip}) =>{
     
-    
+    const buyButtonHandler = async() =>{
+        const location = shipList.purchaseLocations[0].location
+        const type = shipList.type
+        await buyShip(location,type)
+        //await requestBuyShip(userToken, location, type)
+
+    }
 
     const renderImage = () =>{
         switch(shipList.type){
@@ -48,6 +55,12 @@ const InfoShips = ({shipList}) =>{
             <Text style ={styles.infoText}>
                 cargo: {shipList.maxCargo}
             </Text>
+            <View style={styles.containerButton}>
+                <Pressable style={styles.buttonBuy} onPress={()=>buyButtonHandler()}>
+                    <Text style={styles.textButton}>Buy</Text>
+                </Pressable>
+            </View>
+            
         </View>
     )
 }
@@ -74,6 +87,25 @@ const styles = StyleSheet.create({
     containerImage:{
         alignItems:"center",
         marginBottom:20
+    },
+    containerButton:{
+        width:"100%",
+        alignItems:"center"
+    },
+    buttonBuy:{
+        width:"40%",
+        height:35,
+        backgroundColor:"#AB6100",
+        borderColor:"#663600",
+        borderStyle:"solid",
+        borderWidth:3
+    },
+    textButton:{
+        color:"white",
+        height:"100%",
+        width:"100%",
+        textAlign:"center",
+        textAlignVertical:"center"
     }
 })
 

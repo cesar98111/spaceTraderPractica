@@ -4,7 +4,7 @@ import { getShipsList } from "../../services/spaceTraderServices";
 
 import InfoShips from "../Views/InfoShips";
 
-const Ships = ({userToken}) =>{
+const Ships = ({userToken, buyShip}) =>{
 
     const [shipList, setShipList] = useState([])
 
@@ -33,6 +33,8 @@ const Ships = ({userToken}) =>{
                                 <InfoShips
                                     key={List.index}
                                     shipList={List.item}
+                                    userToken={userToken}
+                                    buyShip={buyShip}
                                     />
                             )
                             
