@@ -20,7 +20,7 @@ import Ships from './components/pages/Ships';
 import Register from './components/pages/Register';
 import SignUp from './components/pages/SignUp';
 import Menu from './components/menu/Menu';
-import Logout from './components/pages/Logout';
+
 
 const Drawer = createDrawerNavigator()
 const KEY_STORAGE = "my-key"
@@ -180,9 +180,7 @@ export default function App() {
               <Drawer.Screen name="Ships">
                 {() => <Ships userToken={userToken} buyShip={buyShips}/>}
               </Drawer.Screen>
-              <Drawer.Screen>
-                {()=> <}
-              </Drawer.Screen>
+              
               <Drawer.Screen name="Logout">
                 {()=><Logout setUserAcount={setUserAcount}/>}
               </Drawer.Screen>
