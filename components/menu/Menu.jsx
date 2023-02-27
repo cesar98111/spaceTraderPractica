@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 
 const Menu = ({navigation, userAcount, renderImage}) =>{
     const navigate = useNavigation()
-    const [user, setUser] = useState(userAcount)
+    
     useEffect(()=>{
         console.log("hola")
         console.log(userAcount)

@@ -5,6 +5,7 @@ import * as SecureStore from 'expo-secure-store'
 import { useNavigation } from '@react-navigation/native'
 
 const KEY_STORAGE = "my-key"
+const KEY_PHOTO_STORAGE = "my-photo"
 
 const Logout = ({setUserAcount}) =>{
     
@@ -13,7 +14,10 @@ const Logout = ({setUserAcount}) =>{
     const handlerExit = async()=>{
         try{
             await SecureStore.deleteItemAsync(KEY_STORAGE)
+            await SecureStore.deleteItemAsync(KEY_PHOTO_STORAGE)
             setUserAcount(null)
+            
+            
 
         }catch(err){
             console.log(err)

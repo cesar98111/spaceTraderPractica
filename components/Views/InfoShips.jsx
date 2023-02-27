@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react"
 import { View, Text, StyleSheet, Image, Pressable } from "react-native"
 import { requestBuyShip } from "../../services/spaceTraderServices"
+import { useNavigation } from "@react-navigation/native"
 
 const InfoShips = ({shipList, buyShip}) =>{
     
+    const navigate = useNavigation()
+    
     const buyButtonHandler = async() =>{
-        const location = shipList.purchaseLocations[0].location
+        
+        const location = shipList.purchaseLocations
         const type = shipList.type
         await buyShip(location,type)
         //await requestBuyShip(userToken, location, type)
+        navigate.navigate("Locations")
 
+      
     }
 
     const renderImage = () =>{

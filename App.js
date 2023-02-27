@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationAction, NavigationContainer } from '@react-navigation/native';
+import { NavigationAction, NavigationContainer, useNavigation } from '@react-navigation/native';
 
 import {RootSiblingParent} from  'react-native-root-siblings'
 
@@ -20,13 +20,14 @@ import Ships from './components/pages/Ships';
 import Register from './components/pages/Register';
 import SignUp from './components/pages/SignUp';
 import Menu from './components/menu/Menu';
+import LocationsView from './components/pages/LocationsView';
 
 const Drawer = createDrawerNavigator()
 const KEY_STORAGE = "my-key"
 const KEY_PHOTO_STORAGE = "my-photo"
 
 export default function App() {
-  
+  const navigate = useNavigation()
   const [userAcount , setUserAcount] = useState()
   const [userToken , setUserToken] = useState()
   const [avatar, setAvatar] = useState({
@@ -35,6 +36,8 @@ export default function App() {
     foto3:"foto3"
   })
   const[userAvatar, setUserAvatar] = useState()
+  const[Location, setLocation] = useState()
+
   useEffect(()=>{
     const renderGetUserAcount = async() =>{
       try{
@@ -123,8 +126,9 @@ export default function App() {
 
   const buyShips = async (location,type)=>{
     console.log(location, type)
-    await requestBuyShip(userToken, type, location)
+    setLocation(await requestBuyShip(userToken, type, location))
     setUserAcount( await requestUserAcount(userToken))
+    
   }
 
   const takeLoans = async(loans) =>{
@@ -153,7 +157,7 @@ export default function App() {
   }
   return (
    <RootSiblingParent>
-      <NavigationContainer documentTitle={false}>
+      <NavigationContainer >
         <Drawer.Navigator initialRouteName='Home' drawerContent={(prop) => <Menu {...prop} userAcount={userAcount} renderImage={renderImage}/>} >
           {
             (userAcount === undefined)||(userAcount === null)?
@@ -179,7 +183,9 @@ export default function App() {
               <Drawer.Screen name="Ships">
                 {() => <Ships userToken={userToken} buyShip={buyShips}/>}
               </Drawer.Screen>
-              
+              <Drawer.Screen name="Locations">
+                {()=> <LocationsView userToken={userToken}  locationSystem={Location}/>}
+              </Drawer.Screen>
               <Drawer.Screen name="Logout">
                 {()=><Logout setUserAcount={setUserAcount}/>}
               </Drawer.Screen>
